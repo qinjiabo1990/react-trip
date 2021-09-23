@@ -14,10 +14,10 @@ const defaultState: LanguageState = {
 };
 
 export default (state = defaultState, action: any) => {
-	if (action.type === 'change_language') {
-		const data = { ...state };
-		data.language = action.payload;
-		return data;
+	if (action.type === "change_language") {
+		const newState = {...state};
+		newState.language = action.payload;
+		return newState;
 	}
 	return state;
 }

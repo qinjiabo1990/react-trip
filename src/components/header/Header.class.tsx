@@ -8,8 +8,8 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import store from '../../redux/store'
 import { LanguageState } from '../../redux/languageReducer'
 
-interface State extends LanguageState { }
- 
+interface State extends LanguageState {}
+
 class HeaderComponent extends React.Component<RouteComponentProps, State> {
 	constructor(props: any) {
 		super(props);
@@ -18,17 +18,14 @@ class HeaderComponent extends React.Component<RouteComponentProps, State> {
 	}
 
 	handlerStateChange = () => {
-		const storeState = store.getState();
-		this.setState({
-			language: storeState.language,
-		})
+		this.setState(store.getState());
 	}
 
 	menuClickHandler = (e: any) => {
 		const action = {
 			type: 'change_language',
-			payload: e.key
-		};
+			payload: e.key,
+		}
 		store.dispatch(action);
 	}
 
@@ -38,13 +35,13 @@ class HeaderComponent extends React.Component<RouteComponentProps, State> {
 			<div className={styles.appHeader}>
 				<div className={styles.topHeader}>
 					<div className={styles.inner}>
-						<Typography.Text>Make travel happier </Typography.Text>
+						<Typography.Text>Make travel happier</Typography.Text>
 						<Dropdown.Button
 							style={{ marginLeft: 15 }}
 							overlay={
 								<Menu onClick={this.menuClickHandler}>
-									{this.state.languageList.map((data) => (
-										<Menu.Item key={data.code}>{data.name}</Menu.Item>
+									{this.state.languageList.map((e) => (
+										<Menu.Item key={e.code}>{e.name}</Menu.Item>
 									))}
 								</Menu>
 							}

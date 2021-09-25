@@ -22,11 +22,23 @@ class HeaderComponent extends React.Component<RouteComponentProps, State> {
 	}
 
 	menuClickHandler = (e: any) => {
-		const action = {
-			type: 'change_language',
-			payload: e.key,
+		if(e.key === 'new') {
+			const action = {
+				type: 'add_language',
+				payload: {
+					code: 'new_language',
+					name: 'new language',
+				}
+			}
+			store.dispatch(action);
 		}
-		store.dispatch(action);
+		else {
+			const action = {
+				type: 'change_language',
+				payload: e.key
+			}
+			store.dispatch(action);
+		}
 	}
 
 	render() {
@@ -43,6 +55,7 @@ class HeaderComponent extends React.Component<RouteComponentProps, State> {
 									{this.state.languageList.map((e) => (
 										<Menu.Item key={e.code}>{e.name}</Menu.Item>
 									))}
+									<Menu.Item key={'new'}>Add language</Menu.Item>
 								</Menu>
 							}
 							icon={<GlobalOutlined />}

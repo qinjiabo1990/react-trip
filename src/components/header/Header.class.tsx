@@ -10,6 +10,8 @@ import { LanguageState } from '../../redux/language/languageReducer'
 import { withTranslation, WithTranslation } from 'react-i18next';
 import { changeLanguageAction, addLanguageAction } from '../../redux/language/languageActions'
 
+import  {connect} from 'react-redux'
+
 interface State extends LanguageState {}
 
 class HeaderComponent extends React.Component<RouteComponentProps & WithTranslation, State> {
@@ -25,7 +27,7 @@ class HeaderComponent extends React.Component<RouteComponentProps & WithTranslat
 
 	menuClickHandler = (e: any) => {
 		if(e.key === 'new') {
-			const action = addLanguageAction('new_language','new language')
+			const action = addLanguageAction("new_language", "new language")
 			store.dispatch(action);
 		}
 		else {
@@ -79,4 +81,6 @@ class HeaderComponent extends React.Component<RouteComponentProps & WithTranslat
 	}
 }
 
-export const Header = withTranslation()(withRouter(HeaderComponent));
+const mapStateToProps = 
+
+export const Header = connect()(withTranslation()(withRouter(HeaderComponent)));

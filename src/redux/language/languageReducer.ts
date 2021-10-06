@@ -15,7 +15,7 @@ const defaultState: LanguageState = {
 	],
 };
 
-export default (state = defaultState, action: LanguageActionTypes) => {
+export default (state = defaultState, action:LanguageActionTypes) => {
 	switch (action.type) {
 		case CHANGE_LANGUAGE:
 			i18n.changeLanguage(action.payload);

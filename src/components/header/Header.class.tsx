@@ -6,8 +6,9 @@ import { Layout, Typography, Dropdown, Button, Menu, Input } from 'antd'
 import { GlobalOutlined } from '@ant-design/icons';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import store from '../../redux/store'
-import { LanguageState } from '../../redux/languageReducer'
+import { LanguageState } from '../../redux/language/languageReducer'
 import { withTranslation, WithTranslation } from 'react-i18next';
+import { changeLanguageAction, addLanguageAction } from '../../redux/language/languageActions'
 
 interface State extends LanguageState {}
 
@@ -24,20 +25,11 @@ class HeaderComponent extends React.Component<RouteComponentProps & WithTranslat
 
 	menuClickHandler = (e: any) => {
 		if(e.key === 'new') {
-			const action = {
-				type: 'add_language',
-				payload: {
-					code: 'new_language',
-					name: 'new language',
-				}
-			}
+			const action = addLanguageAction('new_language','new language')
 			store.dispatch(action);
 		}
 		else {
-			const action = {
-				type: 'change_language',
-				payload: e.key
-			}
+			const action = changeLanguageAction(e.key)
 			store.dispatch(action);
 		}
 	}

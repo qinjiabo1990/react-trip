@@ -9,13 +9,13 @@ import store, {RootState} from '../../redux/store'
 import { LanguageState } from '../../redux/language/languageReducer'
 import { withTranslation, WithTranslation } from 'react-i18next';
 import { changeLanguageAction, addLanguageAction } from '../../redux/language/languageActions'
+import {connect} from 'react-redux'
 
 import {Dispatch} from 'redux'
-import  {connect} from 'react-redux'
+
 
 // interface State extends LanguageState {}
-
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state:RootState) => {
 	return {
 		language: state.language,
 		languageList: state.languageList
@@ -24,13 +24,13 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
-		changeLanguage: (languageCode: 'en' | 'zh') => {
-			const action = changeLanguageAction(languageCode);
-			dispatch(action);
-		},
 		addLanguage: (name: string, code: string) => {
-			const action = addLanguageAction(name, code);
-			dispatch(action);
+			const action = addLanguageAction(name, code)
+			dispatch(action)
+		},
+		changeLanguage: (languageCode: 'zh' | 'en') => {
+			const action = changeLanguageAction(languageCode)
+			dispatch(action)
 		}
 	}
 }

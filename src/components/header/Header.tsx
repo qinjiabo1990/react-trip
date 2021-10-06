@@ -5,32 +5,49 @@ import logo from '../../assets/images/logo.svg'
 import { Layout, Typography, Dropdown, Button, Menu, Input } from 'antd'
 import { GlobalOutlined } from '@ant-design/icons';
 import { Link, useHistory, useLocation, useParams, useRouteMatch } from 'react-router-dom';
+import { useSelector } from '../../redux/hooks';
+import { useDispatch }  from 'react-redux'
+import { addLanguageAction, changeLanguageAction } from '../../redux/language/languageActions';
+import { useTranslation } from 'react-i18next';
 
 export const Header: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
   const params = useParams();
   const match = useRouteMatch();
+	const language = useSelector((state) => state.language)
+	const languageList = useSelector((state) => state.languageList)
+	const dispatch = useDispatch();
+	
+	const {t} = useTranslation();
+
+	const menuClickHandler = (e: any) => {
+		if(e.key === 'new') {
+			dispatch(addLanguageAction('new language', 'new_language'))
+		}
+		else {
+			dispatch(changeLanguageAction(e.key))
+		}
+	}
 
   return (
     <div className={styles.appHeader}>
       <div className={styles.topHeader}>
         <div className={styles.inner}>
-          <Typography.Text>Make travel happier</Typography.Text>
+          <Typography.Text>{t('header.slogan')}</Typography.Text>
           <Dropdown.Button
-              style={{ marginLeft: 15 }}
-              overlay={
-                <Menu>
-                  {/* {languageList.map(data => {
-                    return <Menu.Item key={data.code}>{data.name}</Menu.Item>
-                  })} */}
-                  <Menu.Item key={"1"}>中文</Menu.Item>
-                  <Menu.Item key={"2"}>English</Menu.Item>
-                </Menu>
-              }
-              icon={<GlobalOutlined />}
-            >语言
-            </Dropdown.Button>
+							style={{ marginLeft: 15 }}
+							overlay={
+								<Menu onClick={menuClickHandler}>
+									{languageList.map((e) => (
+										<Menu.Item key={e.code}>{e.name}</Menu.Item>
+									))}
+									<Menu.Item key={'new'}>{t('header.add_new_language')}</Menu.Item>
+								</Menu>
+							}
+							icon={<GlobalOutlined />}
+						>{language === 'zh' ? "中文" : "English"}
+						</Dropdown.Button>
             <Button.Group className={styles.buttonGroup}>
               <Button onClick={()=>history.push('signup')}>Register</Button>
               <Link to='/signin'><Button>Signin</Button></Link>

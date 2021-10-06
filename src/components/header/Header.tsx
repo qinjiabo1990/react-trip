@@ -15,15 +15,15 @@ export const Header: React.FC = () => {
   const location = useLocation();
   const params = useParams();
   const match = useRouteMatch();
-	const language = useSelector((state) => state.language)
-	const languageList = useSelector((state) => state.languageList)
-	const dispatch = useDispatch();
-	
+	const language = useSelector(state => state.language)
+	const languageList = useSelector(state => state.languageList)
+	const dispatch = useDispatch()
+
 	const {t} = useTranslation();
 
 	const menuClickHandler = (e: any) => {
 		if(e.key === 'new') {
-			dispatch(addLanguageAction('new language', 'new_language'))
+			dispatch(addLanguageAction('new_language', 'new language'))
 		}
 		else {
 			dispatch(changeLanguageAction(e.key))

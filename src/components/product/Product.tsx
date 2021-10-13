@@ -7,7 +7,7 @@ import { ProductImages } from './ProductImages'
 interface ProductTyoes {
 	title: JSX.Element;
 	source: string;
-	products: any[];
+	products: any[]
 }
 
 export const Product: React.FC<ProductTyoes> = ({ title, source, products }) => {

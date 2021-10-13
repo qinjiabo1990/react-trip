@@ -17,7 +17,7 @@ interface FetchRecommendProductFail {
 	payload: any
 }
 
-export type RecommendProductAction = FetchRecommendProductState | FetchRecommendProductSuccess | FetchRecommendProductFail;
+export type RecommendProductAction = FetchRecommendProductState | FetchRecommendProductSuccess | FetchRecommendProductFail
 
 export const fetchRecommendProductStateActionCreator = ():FetchRecommendProductState => {
 	return {

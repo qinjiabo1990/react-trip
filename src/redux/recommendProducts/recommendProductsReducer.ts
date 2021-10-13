@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import {FETCH_RECOMMEND_PRODUCTS_FAIL, FETCH_RECOMMEND_PRODUCTS_STATE, FETCH_RECOMMEND_PRODUCTS_SUCCESS, RecommendProductAction} from './RecommendProductsActions'
+import { FETCH_RECOMMEND_PRODUCTS_FAIL, FETCH_RECOMMEND_PRODUCTS_STATE, FETCH_RECOMMEND_PRODUCTS_SUCCESS, RecommendProductAction } from "./RecommendProductsActions";
 
 interface recommendProductState {
 	productList: any[],
@@ -7,20 +7,20 @@ interface recommendProductState {
 	error: string | null,
 }
 
-const defaultRecommendProducts: recommendProductState = {
+const defaultRecommendProduct: recommendProductState = {
 	productList: [],
 	loading: true,
 	error: null,
 }
 
-export default (state=defaultRecommendProducts, action: RecommendProductAction) => {
+export default (state= defaultRecommendProduct, action:RecommendProductAction) => {
 	switch(action.type) {
 		case FETCH_RECOMMEND_PRODUCTS_STATE:
-			return {...state, loading: true}
+			return {...state}
 		case FETCH_RECOMMEND_PRODUCTS_SUCCESS:
-			return {...state, loading:false, productList: action.payload}
+			return {...state, productList: action.payload, loading: false}
 		case FETCH_RECOMMEND_PRODUCTS_FAIL:
-			return {...state, loading:false, error: action.payload}
+			return {...state, error: action.payload, loading: false}
 		default:
 			return state;
 	}

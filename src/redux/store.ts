@@ -4,7 +4,7 @@ import recommendProductsReducer from "./recommendProducts/recommendProductsReduc
 
 const rootReducer = combineReducers({
 	language: languageReducer,
-	recommendProduct: recommendProductsReducer
+	recommendProducts: recommendProductsReducer
 })
 
 const store = createStore(rootReducer);

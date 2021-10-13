@@ -6,39 +6,42 @@ import sideImage from '../../assets/images/sider_2019_12-09.png'
 import { withTranslation, WithTranslation } from 'react-i18next';
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {Dispatch} from 'redux'
 import { RootState } from '../../redux/store';
-import { Dispatch } from 'redux';
 import { fetchRecommendProductFailActionCreator, fetchRecommendProductStateActionCreator, fetchRecommendProductSuccessStateActionCreator } from '../../redux/recommendProducts/RecommendProductsActions';
 
 const mapStateToProps = (state:RootState) => {
 	return {
-		loading: state.recommendProduct.loading,
-		productList: state.recommendProduct.productList,
-		error: state.recommendProduct.error
+		productList: state.recommendProducts.productList,
+		error: state.recommendProducts.error,
+		loading: state.recommendProducts.loading
 	}
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
 	return {
-		fetchStart: () => {
+		fetchState: () => {
 			const action = fetchRecommendProductStateActionCreator();
 			dispatch(action)
 		},
-		fetchSuccess: (data) => {dispatch(fetchRecommendProductSuccessStateActionCreator(data))},
-		fetchFail: (error) => {dispatch(fetchRecommendProductFailActionCreator(error))},
+		fetchSuccess: (data) => {
+			dispatch(fetchRecommendProductSuccessStateActionCreator(data));
+		},
+		fetchFail: (error) => {
+			dispatch(fetchRecommendProductFailActionCreator(error));
+		}
 	}
 }
 
 type PropsType = WithTranslation & ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
-
 class HomePage extends React.Component<PropsType> {
 
 	async componentDidMount() {
-		this.props.fetchStart()
+		this.props.fetchState()
 		try {
 			const {data} = await axios.get<any>('http://123.56.149.216:8080/api/productCollections');
-			this.props.fetchSuccess(data);
+			this.props.fetchSuccess(data)
 		} catch (error) {
 			this.props.fetchFail(error.message)
 		}
@@ -74,4 +77,4 @@ class HomePage extends React.Component<PropsType> {
 		)
 	}
 }
-export const Home = connect(mapStateToProps,mapDispatchToProps)(withTranslation()(HomePage));
+export const Home = connect(mapStateToProps, mapDispatchToProps)(withTranslation()(HomePage));

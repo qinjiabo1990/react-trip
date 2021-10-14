@@ -13,7 +13,7 @@ interface productImageType {
 
 export const ProductImages: React.FC<productImageType> = ({id, size, source, title, price}) => {
 	return (
-		<Link target={'_blank'} to={`/details/${id}&${title}`}>
+		<Link target={'_blank'} to={`/details/${id}`}>
 		{size === 'large' ? (
 			<Image preview={false} src={source} alt="tour" height={285} width={490} />
 		) : (<Image preview={false} src={source} alt="tour" height={120} width={240} />)}

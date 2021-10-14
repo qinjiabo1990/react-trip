@@ -44,14 +44,14 @@ export const fetchRecommendProductFailActionCreator = (error):FetchRecommendProd
 		type: FETCH_RECOMMEND_PRODUCTS_FAIL,
 		payload: error
 	}
-}
+} 
 
 export const giveMeDataAction = ():ThunkAction<
-	void, 
-	RootState, 
-	unknown, 
-	RecommendProductAction
-> => async (dispatch, getState) => {
+		void, 
+		RootState, 
+		unknown, 
+		RecommendProductAction
+	> => async (dispatch, getState) => {
 	dispatch(fetchRecommendProductStateActionCreator())
 	try {
 		const {data} = await axios.get<any>('http://123.56.149.216:8080/api/productCollections');

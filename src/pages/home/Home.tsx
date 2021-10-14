@@ -31,7 +31,7 @@ type PropsType = WithTranslation & ReturnType<typeof mapStateToProps> & ReturnTy
 
 class HomePage extends React.Component<PropsType> {
 	componentDidMount() {
-		this.props.giveMeData()
+		this.props.giveMeData();
 	}
 
 	render() {

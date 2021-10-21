@@ -5,7 +5,8 @@ import thunk from 'redux-thunk'
 import { actionLog } from "./middleware/actionLog";
 import { languageChangeMiddle } from "./middleware/languangeChangeMiddle";
 import { productDetailSlice } from "./productDetail/slice"; 
-import { combineReducers } from '@reduxjs/toolkit';
+import { combineReducers } from "@reduxjs/toolkit";
+
 
 const rootReducer = combineReducers({
 	language: languageReducer,

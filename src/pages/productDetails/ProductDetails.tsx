@@ -5,8 +5,8 @@ import axios from 'axios'
 import { Row, Col, Spin, DatePicker, Space, Divider, Typography, Anchor, Menu } from 'antd';
 import { Header, Footer, ProductIntro, ProductComments } from '../../components/'
 import { commentMockData } from './mockup'
-import {useSelector} from '../../redux/hooks'
-import {useDispatch} from 'react-redux'
+import { useSelector } from '../../redux/hooks';
+import { useDispatch } from 'react-redux';
 import {productDetailSlice} from '../../redux/productDetail/slice'
 
 interface ProductDetailsType {
@@ -19,23 +19,23 @@ export const ProductDetails: React.FC<RouteComponentProps<ProductDetailsType>> =
 	// const [product, setProduct] = useState<any>(null)
 	// const [error, setError] = useState<string | null>(null)
 
-	const loading = useSelector((state)=> state.productDetail.loading)
-	const error = useSelector((state) => state.productDetail.error)
-	const product = useSelector((state) => state.productDetail.data)
+	const loading = useSelector(state => state.productDetail.loading);
+	const product = useSelector(state => state.productDetail.product);
+	const error = useSelector(state => state.productDetail.error);
 
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const fetchData = async () => {
 			dispatch(productDetailSlice.actions.fetchStart());
 			try {
-				const { data } = await axios.get(`http://123.56.149.216:8080/api/touristRoutes/${tourDetailsId}`)
-				dispatch(productDetailSlice.actions.fetchSuccess(data))
+				const {data} = await axios.get(`http://123.56.149.216:8080/api/touristRoutes/${tourDetailsId}`)
+				dispatch(productDetailSlice.actions.fetchSuccess(data));
 			} catch (error) {
-				dispatch(productDetailSlice.actions.fetchFail(error.message()))
+				dispatch(productDetailSlice.actions.fetchFail(error.message));
 			}
 		}
-		fetchData()
+		fetchData();
 	}, [])
 
 	if (loading) {

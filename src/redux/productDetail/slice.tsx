@@ -2,14 +2,14 @@ import {createSlice} from '@reduxjs/toolkit'
 
 interface sliceType {
 	loading: boolean,
+	product: any,
 	error: string | null,
-	data: any
 }
 
 const initialState: sliceType = {
 	loading: true,
+	product: null,
 	error: null,
-	data: null
 }
 
 export const productDetailSlice = createSlice({
@@ -21,12 +21,12 @@ export const productDetailSlice = createSlice({
 		},
 		fetchSuccess: (state, action) => {
 			state.loading = false;
-			state.data = action.payload;
+			state.product = action.payload;
 			state.error = null;
 		},
 		fetchFail: (state, action) => {
-			state.error = action.payload;
 			state.loading = false;
-		}
+			state.error = action.payload;
+		},
 	}
 })

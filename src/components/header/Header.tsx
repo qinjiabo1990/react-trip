@@ -58,7 +58,7 @@ export const Header: React.FC = () => {
       <Layout.Header className={styles.mainHeader}>
       <img src={logo} alt="logo" className={styles['App-logo']} />
           <Typography.Title level={3} className={styles.title}>React Trip</Typography.Title>
-          <Input.Search className={styles.searchInput} placeholder="input search text" />
+          <Input.Search className={styles.searchInput} placeholder="input search text" onSearch={(keywords)=>history.push('/search/' + keywords)} />
       </Layout.Header>
       <Menu mode={'horizontal'} className={styles.mainMenu}>
         <Menu.Item key='1' onClick={()=>history.push('')}>Home</Menu.Item>

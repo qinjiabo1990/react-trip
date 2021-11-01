@@ -7,7 +7,7 @@ import { Header, Footer, ProductIntro, ProductComments } from '../../components/
 import { commentMockData } from './mockup'
 import { useSelector } from '../../redux/hooks';
 import { useDispatch } from 'react-redux';
-import {productDetailSlice} from '../../redux/productDetail/slice'
+import {getProductDetail} from '../../redux/productDetail/slice'
 
 interface ProductDetailsType {
 	tourDetailsId: string;
@@ -26,16 +26,7 @@ export const ProductDetails: React.FC<RouteComponentProps<ProductDetailsType>> =
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const fetchData = async () => {
-			dispatch(productDetailSlice.actions.fetchStart());
-			try {
-				const {data} = await axios.get(`http://123.56.149.216:8080/api/touristRoutes/${tourDetailsId}`)
-				dispatch(productDetailSlice.actions.fetchSuccess(data));
-			} catch (error) {
-				dispatch(productDetailSlice.actions.fetchFail(error.message));
-			}
-		}
-		fetchData();
+		dispatch(getProductDetail(tourDetailsId));
 	}, [])
 
 	if (loading) {

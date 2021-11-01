@@ -5,16 +5,23 @@ import thunk from 'redux-thunk'
 import { actionLog } from "./middleware/actionLog";
 import { languageChangeMiddle } from "./middleware/languangeChangeMiddle";
 import { productDetailSlice } from "./productDetail/slice"; 
-import { combineReducers } from "@reduxjs/toolkit";
+import { productSearchSlice } from "./productSearch/slice";
+import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
 
 const rootReducer = combineReducers({
 	language: languageReducer,
 	recommendProducts: recommendProductsReducer,
 	productDetail: productDetailSlice.reducer,
+	productSearch: productSearchSlice.reducer,
 })
 
-const store = createStore(rootReducer, applyMiddleware(thunk, actionLog, languageChangeMiddle));
+//const store = createStore(rootReducer, applyMiddleware(thunk, actionLog, languageChangeMiddle));
+const store = configureStore({
+	reducer: rootReducer,
+	middleware: (getDefaultMiddleware)=>[...getDefaultMiddleware(), actionLog],
+	devTools: true,
+})
 
 export type RootState = ReturnType<typeof store.getState>
 

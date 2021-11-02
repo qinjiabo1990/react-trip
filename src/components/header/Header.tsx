@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
 						>{language === 'zh' ? "中文" : "English"}
 						</Dropdown.Button>
             <Button.Group className={styles.buttonGroup}>
-              <Button onClick={()=>history.push('signup')}>Register</Button>
+              <Button onClick={()=>history.push('/signup')}>Register</Button>
               <Link to='/signin'><Button>Signin</Button></Link>
             </Button.Group>
         </div>
@@ -58,7 +58,7 @@ export const Header: React.FC = () => {
       <Layout.Header className={styles.mainHeader}>
       <img src={logo} alt="logo" className={styles['App-logo']} />
           <Typography.Title level={3} className={styles.title}>React Trip</Typography.Title>
-          <Input.Search className={styles.searchInput} placeholder="input search text" onSearch={(keywords)=>history.push('/search/' + keywords)} />
+          <Input.Search className={styles.searchInput} placeholder="input search text" onSearch={(keyword)=>history.push('/search/' + keyword)} />
       </Layout.Header>
       <Menu mode={'horizontal'} className={styles.mainMenu}>
         <Menu.Item key='1' onClick={()=>history.push('')}>Home</Menu.Item>

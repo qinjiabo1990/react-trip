@@ -119,7 +119,7 @@ export const ProductList: React.FC<PropsType> = ({
                     ¥ {item.price}
                   </Text>
                 )}
-                <Link to={"/detail/" + item.id}> {item.title}</Link>
+                <Link to={"/details/" + item.id}> {item.title}</Link>
               </>
             }
             description={item.tags}

@@ -1,12 +1,11 @@
 import React from 'react'
 import styles from './SignUp.module.css'
-import { Header } from '../../components'
+import { UserLayout } from '../../layouts/userLayout'
 
 export const SignUp : React.FC = () => {
   return(
-    <>
-      <Header />
+    <UserLayout>
       <h1>SignUp</h1>
-    </>
+    </UserLayout>
   )
 }

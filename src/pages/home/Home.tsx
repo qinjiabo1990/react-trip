@@ -5,13 +5,14 @@ import { Header, SideMenu, Carousel, Footer, Product } from '../../components';
 import sideImage from '../../assets/images/sider_2019_12-09.png'
 import { withTranslation, WithTranslation } from 'react-i18next';
 import axios from 'axios'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { RootState } from '../../redux/store';
-import { 
+import {
 	giveMeDataAction
 } from '../../redux/recommendProducts/RecommendProductsActions';
+import { MainLayout } from '../../layouts/mainLayout';
 
-const mapStateToProps = (state:RootState) => {
+const mapStateToProps = (state: RootState) => {
 	return {
 		productList: state.recommendProducts.productList,
 		error: state.recommendProducts.error,
@@ -19,7 +20,7 @@ const mapStateToProps = (state:RootState) => {
 	}
 }
 
-const mapDispatchToProps  = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
 	return {
 		giveMeData: () => {
 			dispatch(giveMeDataAction())
@@ -35,17 +36,16 @@ class HomePage extends React.Component<PropsType> {
 	}
 
 	render() {
-		const {t} = this.props;
-		const {productList, loading, error} = this.props
-		if (loading){
+		const { t } = this.props;
+		const { productList, loading, error } = this.props
+		if (loading) {
 			return <Spin />
 		}
 		if (error) {
 			return <div>{error}</div>
 		}
 		return (
-			<>
-				<Header />
+			<MainLayout>
 				<Row className={styles.homeBody}>
 					<Col xs={6}>
 						<SideMenu />
@@ -59,8 +59,7 @@ class HomePage extends React.Component<PropsType> {
 					source={sideImage}
 					products={productList[0].touristRoutes}
 				/>
-				<Footer />
-			</>
+			</MainLayout>
 		)
 	}
 }

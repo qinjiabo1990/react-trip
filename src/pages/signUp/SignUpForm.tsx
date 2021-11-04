@@ -11,16 +11,15 @@ export const SignUpForm: React.FC = () => {
   const onFinish = async (values: any) => {
     console.log('Success:', values);
 		try {
-			await axios.post('http://123.56.149.216:8080/auth/register', {
-			email: values.username,
-			password: values.password,
-			confirmPassword: values.confirm,
-		})
-		history.push('/signin/')
+			await axios.post('http://123.56.149.216:8080/auth/register',{
+				email: values.username,
+				password: values.password,
+				confirmPassword: values.confirm,
+			})
+			history.push('/signin')
 		} catch (error) {
 			alert('Failed')
 		}
-		
   };
 
   const onFinishFailed = (errorInfo: any) => {

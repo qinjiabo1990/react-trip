@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './SignInForm.module.css'
-
+import { signIn } from '../../redux/user/slice';
+import { useSelector } from '../../redux/hooks'
+import { useHistory } from 'react-router';
+import { useDispatch } from 'react-redux';
 import { Form, Input, Button, Checkbox } from 'antd';
 
+
 export const SignInForm = () => {
+
+	const loading = useSelector(state => state.user.loading)
+	const error = useSelector(s => s.user.error)
+	const jwt = useSelector(s => s.user.token)
+	const dispatch = useDispatch()
+	const history = useHistory()
+
+	useEffect(()=>{
+		if(jwt !== null){
+			history.push('/')
+		}
+	},[history, jwt])
+
   const onFinish = (values: any) => {
     console.log('Success:', values);
+		dispatch(signIn({email: values.username, password: values.password}))
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
+		
   };
 
   return (
@@ -44,7 +63,7 @@ export const SignInForm = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={loading}>
           Submit
         </Button>
       </Form.Item>

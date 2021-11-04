@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './header.module.css'
 import 'antd/dist/antd.css';
 import logo from '../../assets/images/logo.svg'
@@ -9,6 +9,8 @@ import { useSelector } from '../../redux/hooks';
 import { useDispatch }  from 'react-redux'
 import { addLanguageAction, changeLanguageAction } from '../../redux/language/languageActions';
 import { useTranslation } from 'react-i18next';
+import jwt_decode from 'jwt-decode'
+import { userSlice } from '../../redux/user/slice';
 
 export const Header: React.FC = () => {
   const history = useHistory();
@@ -21,6 +23,22 @@ export const Header: React.FC = () => {
 	const dispatch = useDispatch()
 
 	const {t} = useTranslation();
+
+	const jwt = useSelector(s=>s.user.token)
+	const [username, setUserName] = useState('')
+
+	const signOut = () => {
+		dispatch(userSlice.actions.logOut());
+		history.push('/')
+		// window.location.reload(false);
+	}
+
+	useEffect(()=>{
+		if(jwt){
+			const token: any = jwt_decode(jwt)
+			setUserName(token.username)
+		}
+	},[jwt])
 
 	const menuClickHandler = (e: any) => {
 		if(e.key === 'new') {
@@ -49,10 +67,21 @@ export const Header: React.FC = () => {
 							icon={<GlobalOutlined />}
 						>{language === 'zh' ? "中文" : "English"}
 						</Dropdown.Button>
-            <Button.Group className={styles.buttonGroup}>
+						{ jwt ? (
+							<Button.Group className={styles.buttonGroup}>
+								<span>
+									{t('header.welcome')}
+									<Typography.Text strong>{username}</Typography.Text>
+								</span>
+								<Button>{t('header.shoppingCart')}</Button>
+								<Button onClick={signOut}>{t('header.signOut')}</Button>
+							</Button.Group>
+						) : (
+							<Button.Group className={styles.buttonGroup}>
               <Button onClick={()=>history.push('/signup')}>Register</Button>
               <Link to='/signin'><Button>Signin</Button></Link>
             </Button.Group>
+						)}
         </div>
       </div>
       <Layout.Header className={styles.mainHeader}>

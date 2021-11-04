@@ -30,7 +30,6 @@ export const Header: React.FC = () => {
 	const signOut = () => {
 		dispatch(userSlice.actions.logOut());
 		history.push('/')
-		// window.location.reload(false);
 	}
 
 	useEffect(()=>{

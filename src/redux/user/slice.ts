@@ -15,17 +15,15 @@ const initialState: UserState = {
 
 export const signIn = createAsyncThunk(
 	"user/signIn",
-	async (paramaters: {
+	async (paramaters:{
 		email: string,
-		password: string,
+		password: string
 	}, thunkAPI) => {
-		const { data } : any = await axios.post(
-			`http://123.56.149.216:8080/auth/login`, {
+		const {data}: any = await axios.post('http://123.56.149.216:8080/auth/login', {
 			email: paramaters.email,
-			password: paramaters.password
-		}
-		);
-		return data.token;
+			password: paramaters.password,
+		})
+		return data.token
 	}
 );
 
@@ -33,11 +31,11 @@ export const userSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {
-		logOut: (state) => {
+		signOut: state => {
 			state.loading = false;
-			state.token = null;
 			state.error = null;
-		},
+			state.token = null;
+		}
 	},
 	extraReducers: {
 		[signIn.pending.type]: (state) => {

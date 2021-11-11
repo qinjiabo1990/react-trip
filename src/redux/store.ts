@@ -14,7 +14,7 @@ import storage from 'redux-persist/lib/storage'
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist:['user']
+	whitelist: ['user']
 }
 
 const rootReducer = combineReducers({
@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
 	user: userSlice.reducer,
 })
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 //const store = createStore(rootReducer, applyMiddleware(thunk, actionLog, languageChangeMiddle));
 const store = configureStore({

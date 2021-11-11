@@ -72,7 +72,7 @@ export const Header: React.FC = () => {
 									{t('header.welcome')}
 									<Typography.Text strong>{username}</Typography.Text>
 								</span>
-								<Button onClick={()=>history.push("/shoppingCart")}>{t('header.shoppingCart')}</Button>
+								<Button onClick={()=>history.push('/shoppingCart')}>{t('header.shoppingCart')}</Button>
 								<Button onClick={signOut} >{t('header.signOut')}</Button>
 							</Button.Group>
 						) : (

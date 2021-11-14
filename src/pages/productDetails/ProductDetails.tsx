@@ -26,8 +26,10 @@ export const ProductDetails: React.FC<RouteComponentProps<ProductDetailsType>> =
 	const loading = useSelector(state => state.productDetail.loading);
 	const product = useSelector(state => state.productDetail.product);
 	const error = useSelector(state => state.productDetail.error);
-	const jwt = useSelector(state => state.user.token) as string;
-	const shoppingCartLoading = useSelector(state => state.shoppingCart.loading);
+
+	//jwt and loading
+	const jwt = useSelector(s=>s.user.token) as string
+	const shoppingCartLoading = useSelector(s=>s.shoppingCart.loading)
 
 	const dispatch = useDispatch();
 

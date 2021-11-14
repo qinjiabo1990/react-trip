@@ -19,11 +19,11 @@ const PrivateRoute = ({ component, isAuthenticated, ...rest }) => {
 
 function App() {
 	const jwt = useSelector(s => s.user.token)
-
 	const dispatch = useDispatch();
 
+	// Check jwt, if true, load shopping chart
 	useEffect(() => {
-		if (jwt) {
+		if(jwt) {
 			dispatch(getShoppingCart(jwt))
 		}
 	}, [jwt])

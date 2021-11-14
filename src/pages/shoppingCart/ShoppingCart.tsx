@@ -10,10 +10,11 @@ import { addShoppingCart, clearShoppingCart } from '../../redux/shoppingCart/sli
 
 
 export const ShoppingCart: React.FC = () => {
-	const shoppingCartLoading = useSelector(s => s.shoppingCart.loading)
-	const items = useSelector(s => s.shoppingCart.items)
-	const jwt = useSelector(s => s.user.token) as string
-	const dispatch = useDispatch()
+	// loading items jwt
+	const dispatch = useDispatch();
+	const shoppingCartLoading = useSelector(s=>s.shoppingCart.loading)
+	const jwt = useSelector(s=>s.user.token) as string
+	const items = useSelector(s=>s.shoppingCart.items)
 
 	return <MainLayout>
 		<Row>
@@ -31,12 +32,12 @@ export const ShoppingCart: React.FC = () => {
 					<Affix>
 						<PaymentCard
 							loading={shoppingCartLoading}
-							originalPrice={items.map(s => s.originalPrice).reduce((a, b) => a + b, 0)}
-							price={items.map(s => s.originalPrice * (s.discountPresent ? s.discountPresent : 1)).reduce((a, b) => a + b, 0)}
+							originalPrice={items.map(i => i.originalPrice).reduce((a,b)=> (a+b),0)}
+							price={items.map(i=>(i.originalPrice * (i.discountPresent || 1))).reduce((a,b)=> (a+b),0)}
 							onCheckout={() => { }}
-							onShoppingCartClear={() => {
-								dispatch(clearShoppingCart({ jwt, itemIds: items.map(s => s.id)}))
-							}}
+							onShoppingCartClear={
+								()=> dispatch(clearShoppingCart({jwt, itemIds: items.map((s)=>s.id)}))
+							}
 						/>
 					</Affix>
 				</div>

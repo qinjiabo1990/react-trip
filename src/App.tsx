@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Home, SignIn, SignUp, ProductDetails, Search, ShoppingCart } from './pages'
+import { Home, SignIn, SignUp, ProductDetails, Search, ShoppingCart, PlaceOrder } from './pages'
 import styles from './App.module.css'
 import React, { useEffect } from 'react';
 import { useSelector } from './redux/hooks';
@@ -37,6 +37,7 @@ function App() {
 					<Route path="/details/:tourDetailsId" component={ProductDetails} />
 					<Route path="/search/:keyword?" component={Search} />
 					<PrivateRoute isAuthenticated={jwt !== null} path='/shoppingCart' component={ShoppingCart} />
+					<PrivateRoute isAuthenticated={jwt !== null} path='/placeOrder' component={PlaceOrder} />
 					<Route exact path="/" component={Home} />
 					<Route render={() => <h1>404 Page Not Found</h1>} />
 				</Switch>

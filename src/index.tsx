@@ -8,7 +8,7 @@ import {Provider} from 'react-redux';
 import userStore from './redux/store';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
-axios.defaults.headers['x-icode'] = 'E76B66ADC2F6D6DE';
+axios.defaults.headers['x-icode'] = 'EE02A08617D0206D';
 
 ReactDOM.render(
 	<React.StrictMode>

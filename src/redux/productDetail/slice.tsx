@@ -1,6 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { createAsyncThunk } from '@reduxjs/toolkit'
 
 interface sliceType {
 	loading: boolean,
@@ -25,11 +24,11 @@ export const getProductDetail = createAsyncThunk(
 export const productDetailSlice = createSlice({
 	name: 'productDetail',
 	initialState,
-	reducers: {
-		
-	},
+	reducers: {},
 	extraReducers:{
 		[getProductDetail.pending.type]: (state) => {
+			// 由于使用了immer(in redux toolkit)，将state变成mutable
+			// 不然应该是return {...state, loading: true} 
 			state.loading = true
 		},
 		[getProductDetail.fulfilled.type]: (state, action) => {

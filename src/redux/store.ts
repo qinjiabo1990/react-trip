@@ -1,15 +1,17 @@
 import { createStore, applyMiddleware } from "redux";
-import languageReducer from './language/languageReducer'
-import recommendProductsReducer from "./recommendProducts/recommendProductsReducer";
 import thunk from 'redux-thunk'
 import { actionLog } from "./middleware/actionLog";
 import { languageChangeMiddle } from "./middleware/languangeChangeMiddle";
-import { productDetailSlice } from "./productDetail/slice"; 
-import { productSearchSlice } from "./productSearch/slice";
 import { combineReducers, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { userSlice } from "./user/slice";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+
+import languageReducer from './language/languageReducer'
+import recommendProductsReducer from "./recommendProducts/recommendProductsReducer";
+
+import { productDetailSlice } from "./productDetail/slice"; 
+import { productSearchSlice } from "./productSearch/slice";
 import { shoppingCartSlice } from "./shoppingCart/slice";
 import { placeOrderSlice } from "./order/slice";
 
